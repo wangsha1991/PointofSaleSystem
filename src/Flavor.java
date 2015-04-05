@@ -11,11 +11,11 @@ public class Flavor implements IceCream {
 		this.name = name;
 		this.price = price;
 	}
-	
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-	
+
 		return this.name;
 	}
 

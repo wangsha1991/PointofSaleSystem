@@ -1,4 +1,4 @@
-public class Decorator implements IceCream{
+public class Decorator implements IceCream {
 	private String name;
 	private int price;
 
@@ -11,11 +11,11 @@ public class Decorator implements IceCream{
 		this.name = name;
 		this.price = price;
 	}
-	
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-	
+
 		return this.name;
 	}
 
@@ -37,6 +37,5 @@ public class Decorator implements IceCream{
 		// TODO Auto-generated method stub
 		this.price = price;
 	}
-
 
 }
