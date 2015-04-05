@@ -56,6 +56,8 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private int newDecoPrice = 0;
 
 	private AddDialog d;
+	
+	private JButton b10 = new JButton(" Exit ");
 
 	public FrameGUI(String s) {
 		super(s);
@@ -63,7 +65,7 @@ public class FrameGUI extends JFrame implements ActionListener {
 		Container content = getContentPane();
 		content.setLayout(new FlowLayout());
 		Font f = new Font("TimesRoman", Font.BOLD, 20);
-		p1.setLayout(new GridLayout(5, 3));
+		p1.setLayout(new GridLayout(6, 3));
 		l0.setFont(f);
 		content.add(l0);
 		p1.add(l1);
@@ -81,6 +83,7 @@ public class FrameGUI extends JFrame implements ActionListener {
 		p1.add(b5);
 		p1.add(b8);
 		p1.add(b9);
+		p1.add(b10);
 
 		Component[] clist = p1.getComponents();
 		for (int i = 0; i < clist.length; i++) {
@@ -100,7 +103,8 @@ public class FrameGUI extends JFrame implements ActionListener {
 		b7.addActionListener(this);
 		b8.addActionListener(this);
 		b9.addActionListener(this);
-
+		b10.addActionListener(this);
+		
 		setSize(700, 300);
 		setVisible(true);
 	}
@@ -366,6 +370,11 @@ public class FrameGUI extends JFrame implements ActionListener {
 		// start a new transaction
 		if (target == b0) {
 			init_System();
+		}
+		
+		//exit
+		if(target == b10){
+			System.exit(0);
 		}
 	}
 
