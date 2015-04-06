@@ -18,7 +18,8 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private Decorator deco1 = new Decorator(" M&M ", 5);
 	private JButton b2 = new JButton(" [" + deco1.getName() + ", $ "
 			+ deco1.getPrice() + "] ");
-	private JTextField t1 = new JTextField(" Select one flavor only! ", 20);
+	private JTextField t1 = new JTextField("Please select one flavor only! ",
+			25);
 
 	private Flavor flavor2 = new Flavor(" Vanilla ", 20);
 	private JButton b3 = new JButton(" [" + flavor2.getName() + ", $ "
@@ -26,9 +27,9 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private Decorator deco2 = new Decorator(" Strawberry ", 4);
 	private JButton b4 = new JButton(" [" + deco2.getName() + ", $ "
 			+ deco2.getPrice() + "] ");
-	private JTextField t2 = new JTextField(" Please select decorator!  ", 20);
+	private JTextField t2 = new JTextField(" Please select decorators!  ", 25);
 
-	private JTextField t3 = new JTextField(" Total: ", 20);
+	private JTextField t3 = new JTextField(" Total: ", 25);
 
 	private JButton b5 = new JButton(" [System Administrator] ");
 
@@ -49,6 +50,9 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private boolean flagd1 = true;
 	private boolean flagd2 = true;
 	private boolean flagd3 = true;
+	private int num1 = 0;
+	private int num2 = 0;;
+	private int num3 = 0;;
 
 	private String newFlavor = "";
 	private int newFlavorPrice = 0;
@@ -56,7 +60,7 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private int newDecoPrice = 0;
 
 	private AddDialog d;
-	
+
 	private JButton b10 = new JButton(" Exit ");
 
 	public FrameGUI(String s) {
@@ -104,8 +108,8 @@ public class FrameGUI extends JFrame implements ActionListener {
 		b8.addActionListener(this);
 		b9.addActionListener(this);
 		b10.addActionListener(this);
-		
-		setSize(700, 300);
+
+		setSize(800, 300);
 		setVisible(true);
 	}
 
@@ -136,50 +140,26 @@ public class FrameGUI extends JFrame implements ActionListener {
 			}
 		}
 
-		// choose or cancel the first decorator
+		// choose the first decorator
 		if (target == b2) {
-			if (this.flagd1 && this.flagd2 && this.flagd3) {
-				t2.setText(" M&M selected!");
-				this.totalprice += deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = false;
-			} else if (this.flagd1 && !this.flagd2 && this.flagd3) {
-				t2.setText(" M&M and Strawberry selected!");
-				this.totalprice += deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = false;
-			} else if (!this.flagd1 && this.flagd2 && this.flagd3) {
-				t2.setText(" No decorator selected!");
-				this.totalprice -= deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = true;
-			} else if (!this.flagd1 && !this.flagd2 && this.flagd3) {
-				t2.setText(" Strawberry selected!");
-				this.totalprice -= deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = true;
-			} else if (this.flagd1 && this.flagd2 && !this.flagd3) {
-				t2.setText(" M&M and " + deco3.getName() + " selected!");
-				this.totalprice += deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = false;
-			} else if (this.flagd1 && !this.flagd2 && !this.flagd3) {
-				t2.setText(" M&M, Strawberry and " + deco3.getName()
-						+ " selected!");
-				this.totalprice += deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = false;
-			} else if (!this.flagd1 && this.flagd2 && !this.flagd3) {
-				t2.setText(" " + deco3.getName() + " selected!");
-				this.totalprice -= deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = true;
-			} else if (!this.flagd1 && !this.flagd2 && !this.flagd3) {
-				t2.setText(" Strawberry and " + deco3.getName() + " selected!");
-				this.totalprice -= deco1.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd1 = true;
+			this.num1++;
+			if (this.flagd2 && this.flagd3) {
+				t2.setText(" " + this.num1 + " M&M selected!");
+
+			} else if (!this.flagd2 && this.flagd3) {
+				t2.setText(" " + this.num1 + " M&M and " + this.num2
+						+ " Strawberry selected!");
+			} else if (this.flagd2 && !this.flagd3) {
+				t2.setText(" " + this.num1 + " M&M and " + this.num3 + " "
+						+ deco3.getName() + " selected!");
+			} else if (!this.flagd2 && !this.flagd3) {
+				t2.setText(" " + this.num1 + " M&M, " + " " + this.num2
+						+ " Strawberry and " + this.num3 + " "
+						+ deco3.getName() + " selected!");
 			}
+			this.totalprice += deco1.getPrice();
+			t3.setText(" Total: $ " + this.totalprice);
+			this.flagd1 = false;
 		}
 
 		// choose the second flavor
@@ -206,50 +186,25 @@ public class FrameGUI extends JFrame implements ActionListener {
 			}
 		}
 
-		// choose or cancel the second decorator
+		// choose the second decorator
 		if (target == b4) {
-			if (this.flagd1 && this.flagd2 && this.flagd3) {
-				t2.setText(" Strawberry selected!");
-				this.totalprice += deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = false;
-			} else if (this.flagd2 && !this.flagd1 && this.flagd3) {
-				t2.setText(" M&M and Strawberry selected!");
-				this.totalprice += deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = false;
-			} else if (!this.flagd2 && this.flagd1 && this.flagd3) {
-				t2.setText(" No decorator selected!");
-				this.totalprice -= deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = true;
-			} else if (!this.flagd2 && !this.flagd1 && this.flagd3) {
-				t2.setText(" M&M selected!");
-				this.totalprice -= deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = true;
-			} else if (this.flagd1 && this.flagd2 && !this.flagd3) {
-				t2.setText(" Strawberry and " + deco3.getName() + " selected!");
-				this.totalprice += deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = false;
-			} else if (this.flagd2 && !this.flagd1 && !this.flagd3) {
-				t2.setText(" M&M, Strawberry and " + deco3.getName()
-						+ " selected!");
-				this.totalprice += deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = false;
-			} else if (!this.flagd2 && this.flagd1 && !this.flagd3) {
-				t2.setText(" " + deco3.getName() + " selected!");
-				this.totalprice -= deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = true;
-			} else if (!this.flagd2 && !this.flagd1 && !this.flagd3) {
-				t2.setText(" M&M and " + deco3.getName() + " selected!");
-				this.totalprice -= deco2.getPrice();
-				t3.setText(" Total: $ " + this.totalprice);
-				this.flagd2 = true;
+			this.num2++;
+			if (this.flagd1 && this.flagd3) {
+				t2.setText(" " + this.num2 + " Strawberry selected!");
+			} else if (!this.flagd1 && this.flagd3) {
+				t2.setText(" " + this.num1 + " M&M and " + this.num2
+						+ " Strawberry selected!");
+			} else if (this.flagd1 && !this.flagd3) {
+				t2.setText(" " + this.num2 + " Strawberry and " + " "
+						+ this.num3 + " " + deco3.getName() + " selected!");
+			} else if (!this.flagd1 && !this.flagd3) {
+				t2.setText(" " + this.num1 + " M&M, " + " " + this.num2
+						+ " Strawberry and " + this.num3 + " "
+						+ deco3.getName() + " selected!");
 			}
+			this.totalprice += deco2.getPrice();
+			t3.setText(" Total: $ " + this.totalprice);
+			this.flagd2 = false;
 		}
 
 		// choose the third flavor
@@ -285,49 +240,24 @@ public class FrameGUI extends JFrame implements ActionListener {
 		// choose or cancel the third decorator
 		if (target == b7) {
 			if (deco3.getPrice() != 0) {
-				if (this.flagd1 && !this.flagd2 && !this.flagd3) {
-					t2.setText(" Strawberry selected!");
-					this.totalprice -= deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = true;
-				} else if (!this.flagd2 && !this.flagd1 && !this.flagd3) {
-					t2.setText(" M&M and Strawberry selected!");
-					this.totalprice -= deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = true;
-				} else if (this.flagd2 && this.flagd1 && !this.flagd3) {
-					t2.setText(" No decorator selected!");
-					this.totalprice -= deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = true;
-				} else if (this.flagd2 && !this.flagd1 && !this.flagd3) {
-					t2.setText(" M&M selected!");
-					this.totalprice -= deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = true;
-				} else if (this.flagd1 && !this.flagd2 && this.flagd3) {
-					t2.setText(" Strawberry and " + deco3.getName()
+				this.num3++;
+				if (this.flagd1 && !this.flagd2) {
+					t2.setText(" " + this.num2 + " Strawberry and " + this.num3
+							+ " " + deco3.getName() + " selected!");
+				} else if (!this.flagd2 && !this.flagd1) {
+					t2.setText(" " + this.num1 + " M&M, " + " " + this.num2
+							+ " Strawberry and " + this.num3 + " "
+							+ deco3.getName() + " selected!");
+				} else if (this.flagd2 && this.flagd1) {
+					t2.setText(" " + this.num3 + " " + deco3.getName()
 							+ " selected!");
-					this.totalprice += deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = false;
-				} else if (!this.flagd2 && !this.flagd1 && this.flagd3) {
-					t2.setText(" M&M, Strawberry and " + deco3.getName()
+				} else if (this.flagd2 && !this.flagd1) {
+					t2.setText(" " + this.num1 + " M&M and " + deco3.getName()
 							+ " selected!");
-					this.totalprice += deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = false;
-				} else if (this.flagd2 && this.flagd1 && this.flagd3) {
-					t2.setText(" " + deco3.getName() + " selected!");
-					this.totalprice += deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = false;
-				} else if (this.flagd2 && !this.flagd1 && this.flagd3) {
-					t2.setText(" M&M and " + deco3.getName() + " selected!");
-					this.totalprice += deco3.getPrice();
-					t3.setText(" Total: $ " + this.totalprice);
-					this.flagd3 = false;
 				}
+				this.totalprice += deco3.getPrice();
+				t3.setText(" Total: $ " + this.totalprice);
+				this.flagd3 = false;
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"Please enter the third decorator!", "WARNING",
@@ -346,15 +276,19 @@ public class FrameGUI extends JFrame implements ActionListener {
 		// add the new flavor and decorator into the main menu
 		if (target == b8) {
 			try {
-				this.newFlavor = d.getFlavor().getName();
-				this.newFlavorPrice = d.getFlavor().getPrice();
-				this.newDeco = d.getDeco().getName();
-				this.newDecoPrice = d.getDeco().getPrice();
-				AddFlavor(this.newFlavor, this.newFlavorPrice);
-				AddDeco(this.newDeco, this.newDecoPrice);
+				if (d.getFlag() == 0) {
+					this.newFlavor = d.getFlavor().getName();
+					this.newFlavorPrice = d.getFlavor().getPrice();
+					AddFlavor(this.newFlavor, this.newFlavorPrice);
+				} else {
+					this.newDeco = d.getDeco().getName();
+					this.newDecoPrice = d.getDeco().getPrice();
+					AddDeco(this.newDeco, this.newDecoPrice);
+				}
 			} catch (Exception e1) {
+
 				JOptionPane.showMessageDialog(null,
-						"Please enter the third flavor and decorator!",
+						"Please enter the third flavor or decorator!",
 						"WARNING", JOptionPane.WARNING_MESSAGE);
 			}
 
@@ -364,6 +298,10 @@ public class FrameGUI extends JFrame implements ActionListener {
 		if (target == b9) {
 			b6.setText("");
 			b7.setText("");
+			this.newFlavor = null;
+			this.newFlavorPrice = 0;
+			this.newDeco = null;
+			this.newDecoPrice = 0;
 
 		}
 
@@ -371,9 +309,9 @@ public class FrameGUI extends JFrame implements ActionListener {
 		if (target == b0) {
 			init_System();
 		}
-		
-		//exit
-		if(target == b10){
+
+		// exit
+		if (target == b10) {
 			System.exit(0);
 		}
 	}
@@ -382,6 +320,17 @@ public class FrameGUI extends JFrame implements ActionListener {
 		t1.setText(" Select one flavor only! ");
 		t2.setText(" Please select decorator!  ");
 		t3.setText(" Total: ");
+		num1 = 0;
+		num2 = 0;
+		num3 = 0;
+		totalprice = 0;
+		flagf1 = true;
+		flagf2 = true;
+		flagf3 = true;
+		flagd1 = true;
+		flagd2 = true;
+		flagd3 = true;
+
 	}
 
 	// add the third flavor
