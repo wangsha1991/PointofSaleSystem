@@ -8,8 +8,8 @@ import javax.swing.border.Border;
 public class FrameGUI extends JFrame implements ActionListener {
 	private JLabel l0 = new JLabel("  Point-of-Sale System   ");
 
-	private JLabel l1 = new JLabel(" ICE-CREAM Flavor ");
-	private JLabel l2 = new JLabel(" Decorator ");
+	private JLabel l1 = new JLabel(" ICE-CREAM Flavor ", JLabel.CENTER);
+	private JLabel l2 = new JLabel(" Decorator " ,JLabel.CENTER);
 	private JButton b0 = new JButton(" [New IceCream] ");
 
 	private Flavor flavor1 = new Flavor(" Chocolate ", 20);
@@ -27,7 +27,7 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private Decorator deco2 = new Decorator(" Strawberry ", 4);
 	private JButton b4 = new JButton(" [" + deco2.getName() + ", $ "
 			+ deco2.getPrice() + "] ");
-	private JTextField t2 = new JTextField(" Please select decorators!  ", 25);
+	private JTextField t2 = new JTextField(" Please select any decorator!  ", 25);
 
 	private JTextField t3 = new JTextField(" Total: ", 25);
 
@@ -38,11 +38,12 @@ public class FrameGUI extends JFrame implements ActionListener {
 	private Decorator deco3 = new Decorator("  ", 0);
 	private JButton b7 = new JButton(" ");
 
-	private JButton b8 = new JButton(" Add ");
-	private JButton b9 = new JButton(" Remove ");
+	private JButton b8 = new JButton(" Add the third flavor or decorator ");
+	private JButton b9 = new JButton(" Remove the third flavor or decorator ");
 
 	private JPanel p1 = new JPanel();
-
+	private JPanel p2 = new JPanel();
+	
 	private int totalprice = 0;
 	private boolean flagf1 = true;
 	private boolean flagf2 = true;
@@ -69,7 +70,8 @@ public class FrameGUI extends JFrame implements ActionListener {
 		Container content = getContentPane();
 		content.setLayout(new FlowLayout());
 		Font f = new Font("TimesRoman", Font.BOLD, 20);
-		p1.setLayout(new GridLayout(6, 3));
+		p1.setLayout(new GridLayout(4, 3));
+		p2.setLayout(new GridLayout(2, 2));
 		l0.setFont(f);
 		content.add(l0);
 		p1.add(l1);
@@ -84,10 +86,10 @@ public class FrameGUI extends JFrame implements ActionListener {
 		p1.add(b6);
 		p1.add(b7);
 		p1.add(t3);
-		p1.add(b5);
-		p1.add(b8);
-		p1.add(b9);
-		p1.add(b10);
+		p2.add(b8);
+		p2.add(b9);
+		p2.add(b5);
+		p2.add(b10);
 
 		Component[] clist = p1.getComponents();
 		for (int i = 0; i < clist.length; i++) {
@@ -96,6 +98,7 @@ public class FrameGUI extends JFrame implements ActionListener {
 					Color.black, 1));
 		}
 		content.add(p1);
+		content.add(p2);
 
 		b0.addActionListener(this);
 		b1.addActionListener(this);
@@ -109,7 +112,7 @@ public class FrameGUI extends JFrame implements ActionListener {
 		b9.addActionListener(this);
 		b10.addActionListener(this);
 
-		setSize(800, 300);
+		setSize(900, 300);
 		setVisible(true);
 	}
 
@@ -298,11 +301,10 @@ public class FrameGUI extends JFrame implements ActionListener {
 		if (target == b9) {
 			b6.setText("");
 			b7.setText("");
-			this.newFlavor = null;
-			this.newFlavorPrice = 0;
-			this.newDeco = null;
-			this.newDecoPrice = 0;
-
+			this.flavor3 = new Flavor(null,0);
+			this.deco3 = new Decorator(null,0);
+			
+			init_System();
 		}
 
 		// start a new transaction
@@ -317,8 +319,8 @@ public class FrameGUI extends JFrame implements ActionListener {
 	}
 
 	public void init_System() {
-		t1.setText(" Select one flavor only! ");
-		t2.setText(" Please select decorator!  ");
+		t1.setText(" Pleasr select one flavor only! ");
+		t2.setText(" Please select any decorator!  ");
 		t3.setText(" Total: ");
 		num1 = 0;
 		num2 = 0;
